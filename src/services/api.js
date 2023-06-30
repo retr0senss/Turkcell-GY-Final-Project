@@ -124,7 +124,6 @@ class Carts {
     return data;
   }
 
-  
   static async editOne(id, cart) {
     const response = await fetch(`http://localhost:3001/carts/${id}`, {
       method: "PUT",
@@ -139,7 +138,7 @@ class Carts {
     }
     return data;
   }
-  static async deleteOne(id) {
+  static async removeCart(id) {
     const response = await fetch(`http://localhost:3001/carts/${id}`, {
       method: "DELETE",
     });

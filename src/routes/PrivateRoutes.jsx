@@ -1,6 +1,8 @@
-import { Outlet, Navigate, useLocation } from "react-router-dom";
+import { Outlet, Navigate, useLocation, useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const PrivateRoutes = ({ user }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -42,6 +44,7 @@ const PrivateRoutes = ({ user }) => {
     if (location.pathname !== "/login") {
       sessionStorage.setItem("initialRoute", location.pathname);
     }
+
     return <Navigate to="/login" />;
   }
 

@@ -44,6 +44,11 @@ button:hover {
   cursor: pointer;
 }
 
+.menu-overlay {
+  height: 320px;
+  transition: all 0.3s ease-in-out;
+}
+
 .button {
   border-radius: 57px;
 }
@@ -98,6 +103,12 @@ button:hover {
         transform: scale(1.1);
       }
     }
+  }
+}
+
+.mobileViewMore {
+  button {
+    margin-right: 0 !important;
   }
 }
 

@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Home from "../Views/Home/Home";
-import Cart from "../Views/Cart/Cart";
-import ProductDetail from "../Views/ProductDetail/ProductDetail";
-import Products from "../Views/Products/Products";
+import Home from "../views/Home/Home";
+import Cart from "../views/Cart/Cart";
+import ProductDetail from "../views/ProductDetail/ProductDetail";
+import Products from "../views/Products/Products";
 import SignUp from "../views/Signup/Signup";
 import Login from "../views/Login/Login";
 import PrivateRoutes from "./PrivateRoutes";
@@ -14,7 +14,7 @@ const Router = () => {
 
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route exact path="/" element={<Home />} />
       <Route element={<PrivateRoutes user={user} />}>
         <Route path="/cart" element={<Cart />} />
         <Route path="/product-detail/:id" element={<ProductDetail />} />

@@ -4,6 +4,8 @@ import { loginSchema } from "../../schemas";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "../../redux/slices/userSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -18,11 +20,14 @@ const LoginForm = () => {
       return;
     }
     if (user.password !== values.password) {
-      actions.setFieldError("password", "Incorrect password");
+      actions.setFieldError("password", "Email or Incorrect password");
       return;
     }
-    dispatch(setUser(user));
-    navigate("/");
+    toast.success("Login successful");
+    setTimeout(() => {
+      dispatch(setUser(user));
+      navigate("/");
+    }, 2000);
   };
   const formik = useFormik({
     initialValues: {
@@ -45,6 +50,7 @@ const LoginForm = () => {
 
   return (
     <div className="container p-5 my-5">
+      <ToastContainer position="bottom-right" />
       <div className="row justify-content-center">
         <div className="col-lg-6">
           <div className="card shadow-lg border-0 rounded-lg mt-5">

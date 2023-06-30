@@ -1,2 +1,0 @@
-logout yapılmışkan sayfalara girince logine atmıyor!!!! (Şu anlık çözüldü gibi)
-Kayıt olduktan sonra giriş yaparken Users güncellenmiyor giriş yapılmıyor direkt refresh atmadan.

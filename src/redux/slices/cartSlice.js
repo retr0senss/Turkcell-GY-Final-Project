@@ -38,8 +38,15 @@ const cartSlice = createSlice({
     },
     removeFromCart: (state, action) => {
       const itemId = action.payload;
-      state.cart = state.cart.filter((item) => item.id !== itemId);
-      if (state.cart.length === 0) {
+      state.cart = state.cart.map((item) => {
+        return {
+          ...item,
+          products: item.products.filter(
+            (product) => product.productId !== itemId
+          ),
+        };
+      });
+      if (state.cart[0].products.length === 0) {
         state.cart = [];
       }
     },

@@ -4,6 +4,8 @@ import { signupSchema } from "../../schemas";
 import { Users } from "../../services/api";
 import { useDispatch } from "react-redux";
 import { setUsers } from "../../redux/slices/userSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignupForm = () => {
   const navigate = useNavigate();
@@ -17,7 +19,10 @@ const SignupForm = () => {
     await Users.createOne(newUser);
     const users = await Users.getAll();
     dispatch(setUsers(users));
-    navigate("/login");
+    toast.success("Signup successful");
+    setTimeout(() => {
+      navigate("/login");
+    }, 2000);
   };
 
   const formik = useFormik({
@@ -42,6 +47,7 @@ const SignupForm = () => {
 
   return (
     <div className="container p-5 my-5">
+      <ToastContainer position="bottom-right" />
       <div className="row justify-content-center">
         <div className="col-lg-6">
           <div className="card shadow-lg border-0 rounded-lg mt-5">

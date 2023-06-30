@@ -3,7 +3,7 @@ import Button from "../Button/Button";
 const Hero = () => {
   return (
     <div className="hero">
-      <div className="row align-items-center gy-5 gx-0">
+      <div className="row align-items-center gy-5 gx-0 p-5 p-lg-0">
         <div className="col-12 col-lg-6 text-primary">
           <h1 className="fw-bold display-5 mb-1">One More Friend</h1>
           <h2 className="fw-bold mb-5">Thousands More Fun</h2>

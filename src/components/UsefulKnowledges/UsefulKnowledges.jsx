@@ -33,20 +33,22 @@ const UsefulKnowledges = () => {
         ))}
       </div>
       <div className="d-block d-lg-none">
-        <Button
-          text={[
-            "View more",
-            <img
-              src="icons/Chevron_Right_MD.png"
-              className="ms-2"
-              alt="Right Arrow"
-              key="image"
-            />,
-          ]}
-          onClick={() => {}}
-          bgColor="outline-primary"
-          width="w-100"
-        />
+        <div className="mobileViewMore">
+          <Button
+            text={[
+              "View more",
+              <img
+                src="icons/Chevron_Right_MD.png"
+                className="ms-2"
+                alt="Right Arrow"
+                key="image"
+              />,
+            ]}
+            onClick={() => {}}
+            bgColor="outline-primary"
+            width="w-100"
+          />
+        </div>
       </div>
     </div>
   );
