@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import CartCard from "../../components/CartCard/CartCard";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import { removeFromCart, clearCart } from "../../redux/slices/cartSlice";
@@ -8,12 +8,12 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Cart = () => {
-  const [total, setTotal] = useState(0);
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.product.products);
-  const cartDatabase = useSelector((state) => state.cart.cart);
   const [cartProducts, setCartProducts] = useState([]);
   const [randomProducts, setRandomProducts] = useState([]);
+
+  const cartDatabase = useSelector((state) => state.cart.cart);
+  const products = useSelector((state) => state.product.products);
 
   useEffect(() => {
     const updatedCartProducts = products
@@ -21,13 +21,9 @@ const Cart = () => {
         const cartProduct = cartDatabase[0]?.products.find(
           (cartProduct) => cartProduct.productId === product.id
         );
-        if (cartProduct) {
-          return {
-            ...product,
-            quantity: cartProduct.quantity,
-          };
-        }
-        return null;
+        return cartProduct
+          ? { ...product, quantity: cartProduct.quantity }
+          : null;
       })
       .filter((product) => product !== null);
 
@@ -43,18 +39,14 @@ const Cart = () => {
     const shuffledProducts = filteredProducts.sort(() => Math.random() - 0.5);
 
     setRandomProducts(shuffledProducts.slice(0, 4));
-  }, [products, cartProducts]);
+  }, [products]);
 
-  const fetchProductStock = async (productId) => {
-    const product = await Products.getOne(productId);
-    return product.rating.count;
-  };
-
-  const handleRemove = async (id) => {
+  const handleRemove = (id) => {
     dispatch(removeFromCart(id));
     const newCartDatabase = cartDatabase[0].products.filter(
       (product) => product.productId !== id
     );
+
     Carts.editOne(cartDatabase[0].id, {
       ...cartDatabase[0],
       products: newCartDatabase,
@@ -65,46 +57,34 @@ const Cart = () => {
 
   const handleQuantity = async (id, quantity) => {
     const stock = await fetchProductStock(id);
-    if (quantity <= stock) {
-      const newCartProducts = cartProducts.map((product) => {
-        if (product.id === id) {
-          return {
-            ...product,
-            quantity: quantity,
-          };
-        }
-        return product;
-      });
 
-      setCartProducts(newCartProducts);
+    const newQuantity = Math.min(quantity, stock);
+    setCartProducts((cartProducts) =>
+      cartProducts.map((product) =>
+        product.id === id ? { ...product, quantity: newQuantity } : product
+      )
+    );
 
-      const newCartDatabase = cartDatabase[0].products.map((product) => {
-        if (product.productId === id) {
-          return {
-            ...product,
-            quantity: quantity,
-          };
-        }
-        return product;
-      });
+    const newCartDatabase = cartDatabase[0].products.map((product) =>
+      product.productId === id ? { ...product, quantity: newQuantity } : product
+    );
 
-      Carts.editOne(cartDatabase[0].id, {
-        ...cartDatabase[0],
-        products: newCartDatabase,
-      });
-    } else {
+    Carts.editOne(cartDatabase[0].id, {
+      ...cartDatabase[0],
+      products: newCartDatabase,
+    });
+
+    if (quantity > stock) {
       if (stock === 0) {
         toast.error("This product is out of stock.");
-        return;
+      } else {
+        toast.error(`You can add a maximum of ${stock} items to the cart.`);
       }
-
-      const stockMessage = `You are trying to add ${quantity} items, but only ${stock} items are available in stock.`;
-      toast.error(stockMessage);
     }
   };
 
   const handleCheckout = async () => {
-    let outOfStockProducts = [];
+    const outOfStockProducts = [];
 
     for (const cartProduct of cartProducts) {
       const productStock = await fetchProductStock(cartProduct.id);
@@ -136,21 +116,38 @@ const Cart = () => {
       return;
     }
 
-    emptyCart();
+    if (cartProducts.some((product) => product.quantity > 0)) {
+      emptyCart();
+    } else {
+      toast.error(
+        "Cart is empty or all quantities are zero. Cannot proceed to checkout."
+      );
+    }
   };
 
-  const emptyCart = async () => {
+  const emptyCart = () => {
     Carts.removeCart(cartDatabase[0].id);
     dispatch(clearCart());
   };
 
-  useEffect(() => {
-    const total = cartProducts.reduce(
-      (total, product) => total + product.price * product.quantity,
-      0
-    );
-    setTotal(total.toFixed(2));
-  }, [cartProducts]);
+  const fetchProductStock = async (productId) => {
+    const product = await Products.getOne(productId);
+    return product.rating.count;
+  };
+
+  const handleClearCart = () => {
+    if (cartProducts.length === 0) {
+      toast.error("Cart is already empty.");
+      return;
+    }
+
+    emptyCart();
+    toast.success("Cart cleared successfully.");
+  };
+
+  const total = cartProducts
+    .reduce((total, product) => total + product.price * product.quantity, 0)
+    .toFixed(2);
 
   return (
     <div className="container p-5 mt-5">
@@ -160,16 +157,16 @@ const Cart = () => {
         </div>
         <div className="col-6">
           <button
-            className="btn btn-primary float-end"
+            className="btn btn-danger text-white float-end"
             disabled={cartProducts.length === 0}
-            onClick={emptyCart}
+            onClick={handleClearCart}
           >
             Clear Cart
           </button>
         </div>
         <hr />
       </div>
-      {cartProducts.length > 0 &&
+      {cartProducts.length > 0 ? (
         cartProducts.map((product) => (
           <CartCard
             product={product}
@@ -177,8 +174,8 @@ const Cart = () => {
             handleRemove={handleRemove}
             handleQuantity={handleQuantity}
           />
-        ))}
-      {cartProducts.length === 0 && (
+        ))
+      ) : (
         <div className="row">
           <div className="col-12">
             <h3>Cart is empty</h3>
@@ -190,19 +187,23 @@ const Cart = () => {
           <div className="d-flex flex-wrap justify-content-between">
             <h3>Total: ${total}</h3>
             <button
-              className="btn btn-primary"
-              disabled={cartProducts.length === 0}
+              className="btn btn-success text-white"
               onClick={handleCheckout}
+              disabled={cartProducts.length === 0 || total <= 0}
             >
               Checkout
             </button>
           </div>
-          <hr />
-          <div className="row mt-5">
-            <h3>Recommended Products</h3>
-            <hr />
+        </div>
+      </div>
+      <div className="row mt-5">
+        <div className="col-12">
+          <h3>You might also like</h3>
+        </div>
+        <div className="col-12">
+          <div className="row">
             {randomProducts.map((product) => (
-              <div className="col-12 col-lg-3" key={product.id}>
+              <div className="col-lg-3 col-12" key={product.id}>
                 <ProductCard product={product} />
               </div>
             ))}

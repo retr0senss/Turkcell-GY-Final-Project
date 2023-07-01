@@ -41,7 +41,7 @@
       "image": "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
       "rating": {
         "rate": 4.1,
-        "count": 15
+        "count": 20
       }
     },
     {
@@ -264,16 +264,6 @@
   ],
   "Carts": [
     {
-      "userId": 1,
-      "products": [
-        {
-          "productId": 2,
-          "quantity": 22
-        }
-      ],
-      "id": 1
-    },
-    {
       "id": 2,
       "userId": 2,
       "products": [
@@ -300,6 +290,16 @@
           "quantity": 1
         }
       ]
+    },
+    {
+      "userId": 1,
+      "products": [
+        {
+          "productId": 2,
+          "quantity": 17
+        }
+      ],
+      "id": 6
     }
   ]
 }
