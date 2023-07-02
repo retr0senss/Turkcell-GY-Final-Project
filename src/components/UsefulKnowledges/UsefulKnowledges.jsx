@@ -7,7 +7,7 @@ const UsefulKnowledges = () => {
       <div className="row">
         <div className="col-lg-9">
           <p>You Already know ?</p>
-          <h4 className="text-primary fw-bold">Useful Pet Knowledge</h4>
+          <h4 className="text-primary fw-bold">Useful Knowledge</h4>
         </div>
         <div className="d-none d-lg-block col-lg-3">
           <Button

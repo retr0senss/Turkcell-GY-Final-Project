@@ -45,7 +45,7 @@ const ProductList = ({
 
   return (
     <div className="row py-5">
-      <div className="col-lg-3 py-3">
+      <div className="col-lg-3 col-12 py-3">
         <div className="d-none d-lg-block">
           <h2 className="fw-bold text-primary mb-2">Filter</h2>
           <p className="text-dark fw-bold">Category</p>
@@ -84,7 +84,7 @@ const ProductList = ({
           </h2>
 
           <select
-            className="form-select form-select-sm w-auto"
+            className="form-select form-select-sm "
             aria-label="Default select example"
             onChange={handleSortOptionChange}
             defaultValue="default"

@@ -4,19 +4,15 @@
       "email": "admin@admin.com",
       "password": "adminUser.123",
       "role": "admin",
-      "id": 1
+      "id": 1,
+      "image": "https://picsum.photos/300/300"
     },
     {
       "email": "burakcoskun832@gmail.com",
       "password": "Burakcsk54.",
       "role": "user",
-      "id": 2
-    },
-    {
-      "email": "burakcoskun@kklakl.com",
-      "password": "Burakcsk54.",
-      "role": "user",
-      "id": 3
+      "id": 2,
+      "image": "https://picsum.photos/300/300"
     }
   ],
   "Products": [
@@ -296,7 +292,7 @@
       "products": [
         {
           "productId": 2,
-          "quantity": 17
+          "quantity": 20
         }
       ],
       "id": 6

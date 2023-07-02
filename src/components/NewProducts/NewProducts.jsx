@@ -50,7 +50,7 @@ const NewProducts = ({ products, length }) => {
                 key="image"
               />,
             ]}
-            onClick={() => {}}
+            onClick={() => navigate("/products")}
             bgColor="outline-primary"
             width="w-100"
           />

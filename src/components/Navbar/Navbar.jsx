@@ -43,48 +43,73 @@ const Navbar = () => {
               <span className="navbar-toggler-icon"></span>
             </button>
             <a className="navbar-brand m-0" href="/">
-              <img src="/logo.png" alt="" />
+              <img src="/logo.png" alt="logo" className="img-fluid" />
             </a>
             <img
               src="/icons/Vector.svg"
               alt="Search Icon Vector"
               className="img-fluid d-block d-lg-none"
+              onClick={() => setShowSearch(!showSearch)}
             />
             <div
-              className="collapse navbar-collapse ms-5"
+              className="collapse navbar-collapse ms-2"
               id="navbarNavAltMarkup"
             >
               <ul className="navbar-nav ">
                 <li
-                  className="nav-item nav-link text-primary fw-bold fs-6 me-4"
+                  className="nav-item nav-link text-primary fw-bold fs-6 me-2 me-xl-4 "
                   onClick={() => navigate("/")}
                 >
                   Home
                 </li>
                 <li
-                  className="nav-item nav-link text-primary fw-bold fs-6 me-4"
+                  className="nav-item nav-link text-primary fw-bold fs-6 me-2 me-xl-4"
                   onClick={() => navigate("/products")}
                 >
                   Category
                 </li>
-                <li className="nav-item nav-link text-primary fw-bold fs-6 me-4 ">
+                <li className="nav-item nav-link text-primary fw-bold fs-6 me-2 me-xl-4 ">
                   About
                 </li>
                 <li className="nav-item nav-link text-primary fw-bold fs-6">
                   Contact
                 </li>
-                <li
-                  onClick={() => navigate("/login")}
-                  className="nav-item nav-link text-primary fw-bold fs-6 d-block d-lg-none"
-                >
-                  Login
-                </li>
-                <li
-                  className="nav-item nav-link text-primary fw-bold fs-6 d-block d-lg-none"
-                  onClick={() => "/signup"}
-                >
-                  SignUp
-                </li>
+                {!user && (
+                  <div className="d-block d-lg-none">
+                    <li
+                      className="nav-item nav-link text-primary fw-bold fs-6"
+                      onClick={() => navigate("/login")}
+                    >
+                      Login
+                    </li>
+                    <li
+                      className="nav-item nav-link text-primary fw-bold fs-6"
+                      onClick={() => navigate("/signup")}
+                    >
+                      SignUp
+                    </li>
+                  </div>
+                )}
+
+                {user && (
+                  <div className="d-block d-lg-none">
+                    <li
+                      className="nav-item nav-link text-primary fw-bold fs-6"
+                      onClick={() => {
+                        dispatch(clearUser());
+                        navigate("/login");
+                      }}
+                    >
+                      Logout
+                    </li>
+                    <li
+                      className="nav-item nav-link text-primary fw-bold fs-6  "
+                      onClick={() => navigate("/cart")}
+                    >
+                      Shopping Cart
+                    </li>
+                  </div>
+                )}
               </ul>
             </div>
             <div className="d-none d-lg-block">
@@ -126,17 +151,26 @@ const Navbar = () => {
                     }}
                     bgColor="primary"
                   />
-                  <Button
-                    text={
-                      <img
-                        src="/icons/Shopping_Cart_01.png"
-                        alt="Shopping Cart Icon"
-                        className="img-fluid"
-                      />
-                    }
-                    onClick={() => navigate("/cart")}
-                    bgColor="primary"
-                  />
+                  <div className="dropdown d-inline-block">
+                    <img
+                      src={user.image}
+                      alt="User"
+                      className="img-fluid dropdown-toggle rounded-circle "
+                      id="dropdownMenuButton1"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    />
+                    <ul
+                      className="dropdown-menu"
+                      aria-labelledby="dropdownMenuButton1"
+                    >
+                      <li>
+                        <a className="dropdown-item" href="/cart">
+                          Shopping Cart
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
                 </>
               )}
             </div>
@@ -144,6 +178,37 @@ const Navbar = () => {
         </nav>
       </div>
       {isMenuOpen && <div className="menu-overlay d-block d-lg-none"></div>}
+      {showSearch && (
+        <div className="search-overlay d-block d-lg-none pt-5">
+          <div className="container mt-5">
+            <div className="row">
+              <div className="col-12">
+                <div className="d-flex justify-content-between align-items-center bg-secondary rounded px-4 py-2">
+                  <img
+                    src="/icons/input-search.svg"
+                    alt="Search Icon"
+                    className="img-fluid"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Search something here!"
+                    className="me-3 border-0 bg-transparent"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    onKeyDown={handleSearch}
+                  />
+                  <img
+                    src="/icons/Close_SM.png"
+                    alt="Close Icon"
+                    className="img-fluid"
+                    onClick={() => setShowSearch(!showSearch)}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

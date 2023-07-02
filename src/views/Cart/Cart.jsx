@@ -41,6 +41,27 @@ const Cart = () => {
     setRandomProducts(shuffledProducts.slice(0, 4));
   }, [products]);
 
+  useEffect(() => {
+    if (cartProducts.length > 0 && cartDatabase.length > 0) {
+      checkStockStatus(cartProducts);
+    }
+  }, [cartProducts, cartDatabase]);
+
+  const checkStockStatus = async () => {
+    for (const cartProduct of cartProducts) {
+      const productStock = await fetchProductStock(cartProduct.id);
+      const newStock = productStock - cartProduct.quantity;
+
+      if (newStock < 0) {
+        if (newStock === -cartProduct.quantity) {
+          toast.error(`${cartProduct.title} is now out of stock!`);
+        } else {
+          toast.warn(`${cartProduct.title} has low stock!`);
+        }
+      }
+    }
+  };
+
   const handleRemove = (id) => {
     dispatch(removeFromCart(id));
     const newCartDatabase = cartDatabase[0].products.filter(
@@ -85,13 +106,18 @@ const Cart = () => {
 
   const handleCheckout = async () => {
     const outOfStockProducts = [];
+    const lowStockProducts = [];
 
     for (const cartProduct of cartProducts) {
       const productStock = await fetchProductStock(cartProduct.id);
       const newStock = productStock - cartProduct.quantity;
 
       if (newStock < 0) {
-        outOfStockProducts.push(cartProduct.title);
+        if (newStock === -cartProduct.quantity) {
+          outOfStockProducts.push(cartProduct.title);
+        } else {
+          lowStockProducts.push(cartProduct.title);
+        }
       } else {
         delete cartProduct.quantity;
         Products.editOne(cartProduct.id, {
@@ -102,7 +128,7 @@ const Cart = () => {
           },
         });
 
-        if (newStock === 0 && cartProduct.quantity > 0) {
+        if (newStock < 0) {
           toast.warn(`${cartProduct.title} is now out of stock!`);
         }
       }
@@ -116,8 +142,15 @@ const Cart = () => {
       return;
     }
 
+    if (lowStockProducts.length > 0) {
+      const lowStockMessage = lowStockProducts.join(", ");
+      toast.warn(`The following products have low stock: \n${lowStockMessage}`);
+    }
+
     if (cartProducts.some((product) => product.quantity > 0)) {
-      emptyCart();
+      toast.info(
+        "Some quantities exceed the available stock. Please adjust the quantities before proceeding to checkout."
+      );
     } else {
       toast.error(
         "Cart is empty or all quantities are zero. Cannot proceed to checkout."

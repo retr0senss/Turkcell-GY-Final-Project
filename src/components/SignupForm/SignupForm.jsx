@@ -15,6 +15,7 @@ const SignupForm = () => {
       email: values.email,
       password: values.password,
       role: "user",
+      image: values.image,
     };
     await Users.createOne(newUser);
     const users = await Users.getAll();
@@ -30,6 +31,7 @@ const SignupForm = () => {
       email: "",
       password: "",
       confirmPassword: "",
+      image: "",
     },
     validationSchema: signupSchema,
     onSubmit: onSubmit,
@@ -56,6 +58,24 @@ const SignupForm = () => {
             </div>
             <div className="card-body">
               <form onSubmit={handleSubmit}>
+                <div className="form-floating mb-3">
+                  <input
+                    className={`form-control ${
+                      touched.image && errors.image ? "is-invalid" : ""
+                    } ${touched.image && !errors.image ? "is-valid" : ""}`}
+                    id="image"
+                    type="text"
+                    placeholder=" "
+                    value={values.image}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                  <label htmlFor="image">Image URL</label>
+                  {touched.image && errors.image && (
+                    <div className="invalid-feedback">{errors.image}</div>
+                  )}
+                </div>
+
                 <div className="form-floating mb-3">
                   <input
                     className={`form-control ${

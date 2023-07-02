@@ -7,7 +7,7 @@ const Sponsors = () => {
         <div className="col-lg-9">
           <p>
             Proud to be part of{" "}
-            <strong className="text-primary fs-4">Pet Sellers</strong>
+            <strong className="text-primary fs-4">Product Sellers</strong>
           </p>
         </div>
         <div className="d-none d-lg-block col-lg-3">

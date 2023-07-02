@@ -7,8 +7,8 @@ const ProductsBanner = () => {
         <div className="col-12 col-lg-6 text-lg-center position-relative mt-5">
           <div className="rectangle-1 position-absolute"></div>
           <div className="bannerContent ">
-            <h1 className="fw-bold mb-1 ">One More Friend</h1>
-            <h2 className="fw-bold mb-5 ">Thousands More Fun</h2>
+            <h1 className="fw-bold mb-1 ">One Step</h1>
+            <h2 className="fw-bold mb-5 ">To Get Your Dream Product</h2>
             <p className="mb-5 fs-6 fw-bold text-lg-end">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque
               laborum quisquam, quo nesciunt quam quibusdam beatae officiis

@@ -8,10 +8,8 @@ const SponsorBanner = () => {
           <div className="rectangle-1 position-absolute"></div>
           <div className="rectangle-2 position-absolute"></div>
           <div className="bannerContent ">
-            <h1 className="fw-bold display-5 mt-4 text-primary">
-              Adoption <img src="/icons/Paw.svg" alt="Paw" />
-            </h1>
-            <h2 className="fw-bold mb-3 text-primary">Thousands More Fun</h2>
+            <h1 className="fw-bold display-5 mt-4 text-primary">The Biggest</h1>
+            <h2 className="fw-bold mb-3 text-primary">Online Store</h2>
             <p className="text-dark mb-3">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque
               laborum quisquam, quo nesciunt quam quibusdam beatae officiis

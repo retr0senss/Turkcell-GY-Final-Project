@@ -11,7 +11,7 @@ const OurProducts = () => {
     <div className=" ourProducts container d-none d-lg-block py-5">
       <div className="row">
         <div className="col-lg-9">
-          <p>Hard to choose right products for your pets?</p>
+          <p>Hard to choose right products for yourself?</p>
           <h4 className="text-primary fw-bold">Our Products</h4>
         </div>
         <div className="d-none d-lg-block col-lg-3">

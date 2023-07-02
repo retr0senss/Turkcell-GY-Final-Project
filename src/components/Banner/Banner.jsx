@@ -9,9 +9,11 @@ const Banner = () => {
           <div className="rectangle-2 position-absolute"></div>
           <div className="bannerContent ">
             <h1 className="fw-bold display-5 mb-1 text-primary">
-              One More Friend
+              One More Step
             </h1>
-            <h2 className="fw-bold mb-5 text-primary">Thousands More Fun</h2>
+            <h2 className="fw-bold mb-5 text-primary">
+              To Get Your Dream Product
+            </h2>
             <p className="text-dark mb-5">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque
               laborum quisquam, quo nesciunt quam quibusdam beatae officiis
