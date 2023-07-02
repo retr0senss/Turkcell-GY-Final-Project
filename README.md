@@ -6,7 +6,7 @@ This project is created for the Turkcell Geleceği Yazanlar Front-End Training F
 
 The project is based on the [Assignment ReadMe Link](https://github.com/waroi/TurkcellFrontend2023/blob/develop/Dersler/Odevler/Final/Final.md). The design is obtained from the [Figma Link](<https://www.figma.com/file/huLzYoVQ8i78IzsLyYuuhZ/%5BFREE-TEMPLATE%5D-eCommerce-Website---Monito-Pets-for-Best-(Community)-(Community)-(Copy)?type=design&node-id=8%3A32&mode=design&t=6h1r2xwtRwA1tGAd-1>). It includes scaling and responsive design. It is developed for two screen sizes: large screens (1440px) and mobile screens (375px).
 
-## Projeyi ayağa kaldırmak için:
+## To run the project:
 
 After cloning the project, you can run the following commands in the project directory.
 
