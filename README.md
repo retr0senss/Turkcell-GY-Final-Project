@@ -1,30 +1,30 @@
-# React E-Commerce Projesi
+# React E-Commerce Project
 
-Bu proje, Turkcell Geleceği Yazanlar Front-End Eğitimi Final Projesi için yapılmıştır.
+This project is created for the Turkcell Geleceği Yazanlar Front-End Training Final Project.
 
-## Proje Hakkında
+## About the Project
 
-Proje [Ödev ReadMe Linki](https://github.com/waroi/TurkcellFrontend2023/blob/develop/Dersler/Odevler/Final/Final.md) üzerinden alınmıştır. Tasarım [Figma Linki](<https://www.figma.com/file/huLzYoVQ8i78IzsLyYuuhZ/%5BFREE-TEMPLATE%5D-eCommerce-Website---Monito-Pets-for-Best-(Community)-(Community)-(Copy)?type=design&node-id=8%3A32&mode=design&t=6h1r2xwtRwA1tGAd-1>) üzerinden alınmıştır. Ölçeklendirme ve responsive tasarım yapılmıştır. İki ölçü üzerinden yapılmıştır. Büyük ekran ve mobil ekran. Büyük ekran için 1440px, mobil ekran için 375px üzerinden yapılmıştır.
+The project is based on the [Assignment ReadMe Link](https://github.com/waroi/TurkcellFrontend2023/blob/develop/Dersler/Odevler/Final/Final.md). The design is obtained from the [Figma Link](<https://www.figma.com/file/huLzYoVQ8i78IzsLyYuuhZ/%5BFREE-TEMPLATE%5D-eCommerce-Website---Monito-Pets-for-Best-(Community)-(Community)-(Copy)?type=design&node-id=8%3A32&mode=design&t=6h1r2xwtRwA1tGAd-1>). It includes scaling and responsive design. It is developed for two screen sizes: large screens (1440px) and mobile screens (375px).
 
 ## Projeyi ayağa kaldırmak için:
 
-Projeyi klonladıktan sonra aşağıdaki adımları takip edebilirsiniz.
+After cloning the project, you can run the following commands in the project directory.
 
-1. Gerekli paketleri yüklemek için:
+1. To install the packages used in the project:
 
 ```bash
 npm install
 ```
 
-2. Projeyi çalıştırmak için:
+2. To run the project:
 
-npm-run-all paketi ile 3 farklı script çalıştırılmaktadır. Sadece alttaki komutu çalıştırmanız yeterlidir.
+The project runs three different scripts using the npm-run-all package. You only need to run the command below:
 
 ```bash
 npm start
 ```
 
-## Kullanılan Teknolojiler
+## Technologies Used
 
 1. HTML
 2. SCSS
@@ -37,10 +37,10 @@ npm start
 9. Yup
 10. React-Toastify
 
-## Yapan Kişi
+## Developer
 
 [Burak Coşkun](https://github.com/retr0senss)
 
-## İletişim
+## Contact
 
 Burak Coşkun - burakcoskun832@gmail.com
